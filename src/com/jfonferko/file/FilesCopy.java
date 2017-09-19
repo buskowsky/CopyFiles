@@ -4,7 +4,7 @@ import com.jfonferko.file.context.Context;
 import com.jfonferko.file.context.Result;
 import com.jfonferko.file.service.FileService;
 
-public class DirectoryReader {
+public class FilesCopy {
 
     public static void main(String[] args) {
         String path = "c:\\Temp\\SQLDeveloper\\";
@@ -21,14 +21,14 @@ public class DirectoryReader {
         }
 
         if (!Result.getCopiedFiles().isEmpty()) {
-            System.out.println("Przeniesione pliki: " + Result.getCopiedFilesCount());
+            System.out.println("Skopiowane pliki: " + Result.getCopiedFilesCount());
             for (String filename : Result.getCopiedFiles()) {
                 System.out.println(filename);
             }
         }
 
         if (!Result.getNoCopiedFiles().isEmpty()) {
-            System.out.println("Nie przeniesione pliki: " + Result.getNoCopiedFilesCount());
+            System.out.println("Nie skopiowane pliki: " + Result.getNoCopiedFilesCount());
             for (String filename : Result.getNoCopiedFiles()) {
                 System.out.println(filename);
             }
