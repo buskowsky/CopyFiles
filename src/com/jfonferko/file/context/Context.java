@@ -6,56 +6,51 @@ import java.io.File;
 
 public class Context {
 
-    private File file;
-    private String pathFrom;
-    private String pathTo;
+    private final static String INVALID_BASE_PATH = "Nieprawidłowa ścieżka";
+    private final static String INVALID_DESTINATION_PATH = "Katalog docelowy nie isniteje, tworzę katalog.";
 
-    public Context(String pathFrom, String pathTo) throws InvalidPathException {
-        this.pathFrom = pathFrom;
-        this.pathTo = pathTo;
-        File folder = new File(pathFrom);
-        if (!isPathCorrect(folder))
-            throw new InvalidPathException("Nieprawidłowa ścieżka");
-        isPathToReplaceCorrect(pathTo);
-    }
 
-    private boolean isPathCorrect(File path) {
-        file = new File(path.getPath());
-        if (file.isDirectory()) {
-            return true;
-        }
-        return false;
-    }
+    private String sourcePath;
+    private String destinationPath;
 
-    private void isPathToReplaceCorrect(String pathToReplace) {
-        File f = new File(pathToReplace);
-        if (!f.exists() || !f.isDirectory()) {
-            System.out.println("Folder " + pathToReplace + " nie istnieje. Tworzę folder.");
-            new File(pathToReplace).mkdir();
+    public Context(String sourcePath, String destinationPath) throws InvalidPathException {
+        this.sourcePath = sourcePath;
+        this.destinationPath = destinationPath;
+        if (!isBaseFolderCorrect(sourcePath))
+            throw new InvalidPathException(INVALID_BASE_PATH);
+        if (!isDestinationFolderCorrect(destinationPath)) {
+            createFolder(destinationPath);
+            System.out.println(INVALID_DESTINATION_PATH);
         }
     }
 
-    public File getFile() {
-        return file;
+    private boolean isBaseFolderCorrect(String pathFrom) {
+        File baseFolder = new File(pathFrom);
+        return baseFolder.isDirectory();
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    private boolean isDestinationFolderCorrect(String pathToReplace) {
+        File destinationFolder = new File(pathToReplace);
+        return (destinationFolder.exists() || destinationFolder.isDirectory());
     }
 
-    public String getPathFrom() {
-        return pathFrom;
+    private void createFolder(String folderName) {
+        new File(folderName).mkdir();
     }
 
-    public void setPathFrom(String pathFrom) {
-        this.pathFrom = pathFrom;
+    public String getSourcePath() {
+        return sourcePath;
     }
 
-    public String getPathTo() {
-        return pathTo;
+    public void setSourcePath(String sourcePath) {
+        this.sourcePath = sourcePath;
     }
 
-    public void setPathTo(String pathTo) {
-        this.pathTo = pathTo;
+    public String getDestinationPath() {
+        return destinationPath;
+    }
+
+    public void setDestinationPath(String destinationPath) {
+        this.destinationPath = destinationPath;
     }
 }

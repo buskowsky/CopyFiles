@@ -21,8 +21,8 @@ public class FileService {
     public void copyFiles() throws IOException {
         Result result = new Result();
         for (String filename : pathContentReader.getFileList()) {
-            File location = new File(context.getPathFrom() + filename);
-            File destination = new File(context.getPathTo() + filename);
+            File location = new File(context.getSourcePath() + filename);
+            File destination = new File(context.getDestinationPath() + filename);
 
             if (destination.exists()) {
                 Result.getNoCopiedFiles().add(location.toString());

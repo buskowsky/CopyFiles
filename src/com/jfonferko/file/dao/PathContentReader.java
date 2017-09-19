@@ -16,11 +16,12 @@ public class PathContentReader {
         this.context = context;
         fileList = new LinkedList<String>();
         directoryList = new LinkedList<String>();
-        listFilesForFolder(context.getFile());
+        fileListFromFolder(context.getSourcePath());
     }
 
-    private void listFilesForFolder(File folderPath) {
-        for (File fileEntry : folderPath.listFiles()) {
+    private void fileListFromFolder(String sourcePath) {
+        File source = new File(context.getSourcePath());
+        for (File fileEntry : source.listFiles()) {
             if (fileEntry.isDirectory()) {
                 directoryList.add(fileEntry.getName());
             } else {
