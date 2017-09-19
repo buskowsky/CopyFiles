@@ -16,6 +16,7 @@ public class DirectoryReader {
             fileService.copyFiles();
 
         } catch (Exception e) {
+
             System.out.println(e.getCause());
         }
 
