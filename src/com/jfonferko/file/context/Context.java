@@ -1,14 +1,11 @@
 package com.jfonferko.file.context;
 
 import com.jfonferko.file.expcetion.InvalidPathException;
+import com.jfonferko.file.utils.Messages;
 
 import java.io.File;
 
 public class Context {
-
-    private final static String INVALID_BASE_PATH = "Nieprawidłowa ścieżka";
-    private final static String INVALID_DESTINATION_PATH = "Katalog docelowy nie isniteje, tworzę katalog.";
-
 
     private String sourcePath;
     private String destinationPath;
@@ -17,10 +14,10 @@ public class Context {
         this.sourcePath = sourcePath;
         this.destinationPath = destinationPath;
         if (!isBaseFolderCorrect(sourcePath))
-            throw new InvalidPathException(INVALID_BASE_PATH);
+            throw new InvalidPathException(Messages.INVALID_BASE_PATH);
         if (!isDestinationFolderCorrect(destinationPath)) {
             createFolder(destinationPath);
-            System.out.println(INVALID_DESTINATION_PATH);
+            System.out.println(Messages.INVALID_DESTINATION_PATH);
         }
     }
 

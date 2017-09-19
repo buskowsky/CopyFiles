@@ -3,6 +3,7 @@ package com.jfonferko.file;
 import com.jfonferko.file.context.Context;
 import com.jfonferko.file.context.Result;
 import com.jfonferko.file.service.FileService;
+import com.jfonferko.file.utils.Messages;
 
 public class FilesCopy {
 
@@ -16,19 +17,18 @@ public class FilesCopy {
             fileService.copyFiles();
 
         } catch (Exception e) {
-
-            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
         }
 
         if (!Result.getCopiedFiles().isEmpty()) {
-            System.out.println("Skopiowane pliki: " + Result.getCopiedFilesCount());
+            System.out.println(Messages.COPIED_FILES + Result.getCopiedFilesCount());
             for (String filename : Result.getCopiedFiles()) {
                 System.out.println(filename);
             }
         }
 
         if (!Result.getNoCopiedFiles().isEmpty()) {
-            System.out.println("Nie skopiowane pliki: " + Result.getNoCopiedFilesCount());
+            System.out.println(Messages.NO_COPIED_FILES + Result.getNoCopiedFilesCount());
             for (String filename : Result.getNoCopiedFiles()) {
                 System.out.println(filename);
             }
